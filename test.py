@@ -6,7 +6,6 @@ import numpy as np
 import tempfile
 import warnings
 
-
 warnings.filterwarnings("ignore")
 
 @st.cache
@@ -34,12 +33,9 @@ def region_of_interest_masked_for_video(new_img):
     canny = cv2.Canny(blur, 40, 120)
     height = canny.shape[0]
     polygons = np.array([[(200, height), (1100, height), (550, 250)]])  # Creating a triangular mask
-
     mask = np.zeros_like(canny)  # Black pixels
-
     cv2.fillPoly(mask, polygons, 255)  # Fill mask with triangle dimensions as white(255)
     mask = cv2.bitwise_and(canny, mask)
-
     return mask
 
 @st.cache
@@ -47,12 +43,9 @@ def region_of_interest_masked(new_img):
     image = canny(new_img, 50, 120)
     height = image.shape[0]
     polygons = np.array([[(200, height), (1100, height), (550, 250)]])  # Creating a triangular mask
-
     mask = np.zeros_like(image)  # Black pixels
-
     cv2.fillPoly(mask, polygons, 255)  # Fill mask with triangle dimensions as white(255)
     mask = cv2.bitwise_and(image, mask)
-
     return mask
 
 def display_lines(image, lines):
@@ -95,7 +88,6 @@ def average_slope_intercept(image, lines):
 #######################################CODE#####################################################################
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
-#st.title("Lane Detection")
 
 html_temp = """
 <body style="background-color:lightblue;">
@@ -105,7 +97,6 @@ html_temp = """
 </body>
 """
 
-#st.markdown(bg , unsafe_allow_html = True)
 st.markdown(html_temp, unsafe_allow_html=True)
 st.markdown('## Enter desired image')
 st.markdown('### Select what result you would like to see')
